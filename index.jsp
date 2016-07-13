@@ -65,7 +65,6 @@
 
                          <%
                                 MongoIterable<String> collectionNames = mongoDatabase.listCollectionNames();
-
                                 for(String collection: collectionNames){
                                     if(collection.startsWith("system.") == false){
                                         out.print(" <li><a class='collection-item' href='index.jsp?name="+collection+"\' id=\'"+
@@ -77,6 +76,9 @@
 
                 <div class="wrapper">
                 <%
+                	
+                	if(request.getParameter("name") != null)
+                	{
                              MongoCollection<Document> collection = mongoDatabase.getCollection(request.getParameter("name"));
                              MongoCursor<Document> cursor = collection.find().iterator();
                              try {
@@ -94,6 +96,7 @@
                               } finally {
                                 cursor.close();
                               }
+                          }    
                 %>
                </div>
     </body>

@@ -12,7 +12,8 @@
     "contextMenus",
     "clipboardWrite",
     "activeTab",
-    "storage"
+    "storage",
+    "*://*/*"
   ],
   "content_scripts": [
     {
@@ -27,7 +28,7 @@
   ],
   "background": {
     "scripts": [
-      "background.js"
+      "background.js","ContextMenu.js"
     ],
     "persistent": true
   }

@@ -1,27 +1,14 @@
 
-/*
 
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-   /*     console.log(sender.tab ?
-        "from a content script:" + sender.tab.url :
-            "from the extension");
-        if (request.greeting == "hello")
-            sendResponse({farewell: "goodbye"});
-
-        getTags(sender.tab.title);
-        return true;
-    });
-*/
 
 var sub,title,url,text,subject = "";
-
+/*
 var getTags = function(){
 
    //************** getting subjects
     var URL = "http://feelmagic.xyz/notex/api/tagNames.php";
     var hr = new XMLHttpRequest();
-    hr.open("GET",URL,false);
+    hr.open("GET",URL,true);
     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     hr.ontimeout = function () {
         console.error("The request for " + URL + " timed out.");
@@ -37,15 +24,12 @@ var getTags = function(){
     hr.send();
 };
 
-
-
-
-
-
+*/
 
 var formFill = function(){
 
-    getTags();
+  //  getTags();
+    sub = ["python","database","chrome","protocol","HTML","php","Mongodb","xml","cassandra","jsp","json","math","equation","JavaScript","math","network","meaning","Synonyms","dictionary","java","django","tech","windows","hadoop","jquery","mysql","linux","ubuntu","operating","database"," c ","android","data","cobol","basic","ruby"];
     chrome.tabs.executeScript(null,{file:"getSelection.js"},function(response){
         document.getElementById("editor").innerHTML = response;
         document.getElementById("text").innerHTML=response;
@@ -70,9 +54,10 @@ var formFill = function(){
                 break;
             }
         }
-        if(subject == "")
-        subject = "other";
-
+        if(subject == "") 
+        {
+            subject = "other";
+        }
 
         chrome.storage.local.get("Title", function (res) {
 
@@ -123,7 +108,8 @@ document.getElementById("keepTopic").addEventListener("change", titleCheck);
 document.getElementById("keepTitle").addEventListener("change", subCheck);
 
 
-function subCheck() {
+function subCheck()   // if user chooses to store subject for future browsing
+{
 
 
     var c = document.getElementById("keepTitle").checked;
@@ -140,7 +126,8 @@ function subCheck() {
         })
 
 }
-function titleCheck() {
+function titleCheck()                     // if user chooses to store title for future browsing
+{
     if (document.getElementById("keepTopic").checked) {
         var obj = {};
         obj["Topic"] = document.getElementById("topic").value;
@@ -151,3 +138,4 @@ function titleCheck() {
         chrome.storage.local.set({Topic: ""}, function () {
         })
 }
+
