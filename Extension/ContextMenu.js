@@ -31,7 +31,7 @@ function genericOnClick(info, tab) {
     }
 
 
-    if(info.linkUrl != undefined && info.linkUrl.indexOf("youtube") > -1)
+    if(info.linkUrl != undefined && info.linkUrl.indexOf("youtube") > -1 )
     {
         YOUTUBE = 1;
         url = info.linkUrl;
@@ -57,7 +57,7 @@ function genericOnClick(info, tab) {
         };
         hr.send();
     }
-    else if(info.mediaType == undefined && info.linkUrl != undefined && YOUTUBE == 0)
+    else if(info.mediaType == undefined && info.linkUrl != undefined && YOUTUBE == 0)     // Handle hyper links
     {
         if( info.linkUrl.indexOf("vimeo") > -1)
         {
@@ -67,6 +67,11 @@ function genericOnClick(info, tab) {
         {
             // @todo sildeshare embed
         }
+        else
+        {
+            link = info.linkUrl;
+        }
+        saveData(title,subject,solution,link);
     }
     if(info.mediaType != undefined && YOUTUBE == 0)
     {
@@ -74,23 +79,20 @@ function genericOnClick(info, tab) {
 
         if(info.mediaType.indexOf("image") > -1 )
         {
-
+                solution += "<img src=\"" + info.srcUrl + "\"></img>";
 
         }
-        else if(info.mediaType.indexOf("video"))
+        else if(info.mediaType.indexOf("video") > -1)
         {
                 solution += "<br />" + "<video width=\"640\" height=\"360\" controls>" +
                         "<source src=\"" +info.srcUrl + "\" type=\"video/mp4\"></video>";
 
         }
-        else if(info.mediaType.indexOf("audio"))
+        else if(info.mediaType.indexOf("audio") > -1)
         {
-            // @todo Audio
+                solution += "<audio controls> <source src=\"" + info.srcUrl +"\" type=\"audio/mpeg\"></audio>";
         }
-        else if(info.mediaType != undefined)
-        {
-            // @todo handle unknown media types
-        }
+
         saveData(title,subject,solution,link);
     }
 }

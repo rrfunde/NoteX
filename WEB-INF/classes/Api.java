@@ -24,14 +24,14 @@ public class Api extends HttpServlet{
         MongoClient mongoClient = new MongoClient();
         MongoDatabase mongoDatabase = mongoClient.getDatabase("NoteX");
 
+        String request = req.getParameter("req");
 
-        if(req.getParameter("req").equals("new"))
+        if(request.equals("newCollection"))
         {
             mongoDatabase.createCollection(req.getParameter("Collection"));
         }
 
-
-        if(req.getParameter("req").equals("EditServe"))
+        else if(request.equals("EditServe"))
         {
             MongoCollection<Document> collection = mongoDatabase.getCollection(req.getParameter("Collection"));
 
@@ -41,6 +41,19 @@ public class Api extends HttpServlet{
 
         }
 
+        else if(request.equals("removeDocument"))
+        {
+            String name = req.getParameter("name");
+            String id = req.getParameter("id");
+            MongoCollection<Document> collection = mongoDatabase.getCollection(name);
+
+            BasicDBObject query = new BasicDBObject();
+            query.put("_id", new ObjectId(id));
+
+            collection.deleteOne(query);
+            pw.print("deleted");
+
+        }
         pw.close();
 
     }

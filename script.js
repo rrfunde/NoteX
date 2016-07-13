@@ -9,39 +9,44 @@ $(document).ready(function() {
             }//if-else
         });//win func.
     });//ready func.
+
+
 });
 
-
-addCollection=function()
+addCollection = function()
 {
     var Collection = prompt(" enter new subject name");
     if (Collection != null) {
-        //  AJax Request
-        var hr = new XMLHttpRequest();
-        // Create some variables we need to send to our PHP file
         var url = "http://localhost:8080/NoteX/api";
-        var params= "Collection="+Collection + "&req=new";
-        hr.open("POST", url, true);
-        hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-        // Access the onreadystatechange event for the XMLHttpRequest object
-        hr.onreadystatechange = function() {
-            if(hr.readyState == 4 && hr.status == 200) {  // ajax request completed
-                var return_data = hr.responseText;
-                location.reload();
-            }
-        }
-        // Send the data to PHP now... and wait for response to update the status div
-        //  alert(params);
-        hr.send(params);
-// Done Ajax
-
+        var params= "Collection="+Collection + "&req=newCollection";
+        ajaxRequest(url,"POST",params);
     }
 };
 
+addDocument = function () {
+    var title = prompt("Enter topic name");
+    var subject = location.search.substr(6);
+    if(title != "")
+    {
+        var URL = "http://localhost:8080/NoteX/store";
+        var params = "title=" + subject + "&topic=" + title + "&text=<b></b>&linkText=";
+        ajaxRequest(URL,"POST",params);
+        location.reload();
+    }
+};
 
+removeDocument = function (id, collectionName) {
+    var choice = confirm("do you want to confirm");
 
+    if(choice)
+    {
+        var url = "http://localhost:8080/NoteX/api";
+        var params = "req=removeDocument&id="+ id + "&name="+collectionName;
+        ajaxRequest(url,"POST",params);
+        location.reload()
+    }
 
+};
 var clicked_id = 0;
 var solution;
 
@@ -59,11 +64,9 @@ function clickEvent(clicked_id1, name1) {
     var button1 = document.createElement("button");
     button1.className="waves-effect waves-light btn";
     button1.innerHTML = "Submit";
-//input.name = "post";
     input1.innerHTML = divData;
     input1.maxLength = "5000";
    /* button1.className="serverSubmit";*/
-    button1.name = "GO";
     input1.cols = "80";
     input1.rows = "40";
     input1.name = "input2";
@@ -75,6 +78,7 @@ function clickEvent(clicked_id1, name1) {
         selector: "textarea",
         content_css: "content.css",
         force_br_newlines : true,
+        auto_focus : "input2",
         force_p_newlines : false,
         forced_root_block : '',
         fontsize_formats: "8pt 9pt 10pt 11pt 12pt 14pt 16pt 18pt 20pt",
@@ -90,7 +94,7 @@ function clickEvent(clicked_id1, name1) {
 
         toolbar1: " fontselect fontsizeselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist   | link image ",
         toolbar2: "undo redo | style-p style-h1 style-h2 style-h3 style-pre style-code",
-        menubar: ' edit insert format ',
+        menubar: ' edit insert view table ',
 
         image_advtab: true,
 
@@ -102,6 +106,7 @@ function clickEvent(clicked_id1, name1) {
 
                     editor.insertContent('Main button');
                     editor.body.style.fontSize = '24px';
+
                 }
             });
 
@@ -146,22 +151,30 @@ function clickEvent(clicked_id1, name1) {
             return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
 
-        // alert(temp);
-        var hr = new XMLHttpRequest();
 
         var url = "http://localhost:8080/NoteX/api";
         var subject = getParameterByName('name');
         var params= "id="+clicked_id+"&Collection="+subject+"&solution="+encodeURIComponent(temp)+"&req=EditServe";
-        hr.open("POST", url, true);
-        hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-        hr.onreadystatechange = function() {
-            if(hr.readyState == 4 && hr.status == 200) {
-                var return_data = hr.responseText;
-                //  alert(return_data);
-            }
-        }
-
-        hr.send(params);
+       
+        ajaxRequest(url,"POST",params);
     }
+}
+
+
+var ajaxRequest = function (url,type,params)
+{
+    var hr = new XMLHttpRequest();
+    // Create some variables we need to send to our PHP file
+
+    hr.open(type, url, true);
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    hr.onreadystatechange = function() {
+        if(hr.readyState == 4 && hr.status == 200) {  // ajax request completed
+            var return_data = hr.responseText;
+            // do stuff with return data
+        }
+    }
+
+    hr.send(params);
 }
