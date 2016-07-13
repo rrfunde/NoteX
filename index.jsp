@@ -8,19 +8,27 @@
         import="com.mongodb.client.MongoDatabase"
 
 %>
+<%!
 
+
+    MongoClient mongoClient = new MongoClient();
+    MongoDatabase mongoDatabase = mongoClient.getDatabase("NoteX");
+    int idNo = 0;
+%>
 <html>
 <head>
-    <script type="text/javascript" src="tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <link rel="stylesheet" href="css/highlight.css">
     <script src="js/highlight.min.js"></script>
     <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/ghpages-materialize.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
+    <script src="js/materialize.min.js"></script>
+    <link rel="stylesheet" href="css/icon.css">
     <script>hljs.initHighlightingOnLoad();</script>
-    <link rel="shortcut icon" type="image/png" href="icon.png"/>
+    <link rel="icon" type="image/png" href="icon.png"/>
     <link rel="stylesheet" type="text/css" href="content.css">
     <script src="script.js"></script>
 
@@ -36,7 +44,7 @@
                 else
                 {
                     out.print(title + "- NoteX</title>");
-                    out.print(" <div class=\"fixed-action-btn\" style=\"bottom: 45px; right: 24px;\">\n" +
+                    out.print(" <div class=\"fixed-action-btn\" style=\"bottom: 20px; right: 44px;\">\n" +
 "                    <a class=\"btn-floating btn-large red\" onclick=\"addDocument()\">\n" +
 "                    <i class=\"large material-icons\">+</i>\n" +
 "                    </a>\n" +
@@ -44,42 +52,45 @@
                 }
             %>
 
-    <!--
-     <div class="navbar-fixed center">
-    <nav>
-            <a href="index.jsp" class="brand-logo"><h1 >NoteX<br></h1></a>
+                <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%);">
 
-        </nav>
+                    <li class="logo"><a id="logo-container" >
+                        <h1>NoteX</h1>
+                        </a></li>
+                    <li class="search">
+                        <div class="search-wrapper card">
+                            <input id="search"><i class="material-icons">search</i>
+                            <div class="search-results"></div>
+                        </div>
+                    </li>
+                    <a onclick="addCollection()" class="btn-floating  waves-effect waves-light red"><i class="large material-icons"></i></a>
+                    <%
+                        MongoIterable<String> collectionNames = mongoDatabase.listCollectionNames();
+                        for(String collection: collectionNames){
+                            if(collection.startsWith("system.") == false){
 
-    </div>
- -->
+                                out.print("<li class=\"bold\"><a class=\"collapsible-header  waves-effect waves-teal\" href='index.jsp?name="+collection+ "\' id=\'"+
+                                                                                collection + "\'>" + collection + "</a> </li>");
+                            }
+                        }
+                    %>
+
+
+                    </li>
+                        </ul>
+                    </li>
+
+                </ul>
+
 
 
 
         <div class="row-offcanvas row-offcanvas-left">
         <div id="sidebar" class="sidebar-offcanvas">
-            <div class="col-md-12">
-                <h3>&nbsp;&nbsp;Subject&nbsp;&nbsp;&nbsp; <a onclick="addCollection()" class="btn-floating  waves-effect waves-light red"><i class="large material-icons">+</i></a>
+
+                <h3>&nbsp;&nbsp;Subject&nbsp;&nbsp;&nbsp;
                 </h3>
-                <ul class="nav nav-pills nav-stacked" id="subjectList">
-                        <%!
-
-
-                                MongoClient mongoClient = new MongoClient();
-                                MongoDatabase mongoDatabase = mongoClient.getDatabase("NoteX");
-                                int idNo = 0;
-                         %>
-
-                         <%
-                                MongoIterable<String> collectionNames = mongoDatabase.listCollectionNames();
-                                for(String collection: collectionNames){
-                                    if(collection.startsWith("system.") == false){
-                                        out.print(" <li><a class='collection-item' href='index.jsp?name="+collection+"\' id=\'"+
-                                       collection +"\'>" + collection + "</a></li> ");
-                                    }
-                                }
-                        %>
-                </ul></div></div></div></div>
+                </div></div></div></div>
 
                 <div class="wrapper">
                 <%
@@ -106,6 +117,8 @@
                               }
                           }    
                 %>
-               </div>
-    </body>
+
+                </div>
+
+</body>
 </html>

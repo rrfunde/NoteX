@@ -92,9 +92,9 @@ function clickEvent(clicked_id1, name1) {
             "  paste textcolor colorpicker textpattern"
         ],
 
-        toolbar1: " fontselect fontsizeselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist   | link image ",
-        toolbar2: "undo redo | style-p style-h1 style-h2 style-h3 style-pre style-code",
-        menubar: ' edit insert view table ',
+        toolbar1: "undo redo | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist   ",
+        toolbar2: "fontselect fontsizeselect | style-p style-h1 style-h2 style-h3 style-pre style-code | link image | fullscreen",
+        menubar: 'file edit insert view table ',
 
         image_advtab: true,
 
@@ -103,14 +103,12 @@ function clickEvent(clicked_id1, name1) {
                 text: 'My button',
                 icon: false,
                 onclick: function () {
-
                     editor.insertContent('Main button');
                     editor.body.style.fontSize = '24px';
-
                 }
             });
 
-            //
+            
             editor.on('keydown', function (event) {
                 if (event.keyCode == 9) { // tab pressed
                     if (event.shiftKey) {
@@ -134,9 +132,7 @@ function clickEvent(clicked_id1, name1) {
     button1.onclick = function(){
 
         var div=document.getElementById(name);
-
         var temp=tinyMCE.get('input2').getContent();
-        //div.removeChild('input2');
         document.getElementById('input2').style.display = "none";
 
         div.innerHTML=temp;
