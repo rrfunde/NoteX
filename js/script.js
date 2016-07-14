@@ -60,10 +60,22 @@ removeDocument = function (id, collectionName) {
 
 var Search = function(){
 	var query = document.getElementById("search").value;
-	if(query != ""){
-	location.href = "?name=" + location.search.substr(6) +"&q=" + query;	
-	}
+	var coll = gup("name",location.href);
+	if(query != "" && coll != null){
 
+	location.href =  location.origin + location.pathname +"?name=" + coll	 +"&q=" + query;	
+	}
+	else
+	{
+		if(coll ==  null)
+		{
+			alert("choose collection and then search");
+		}
+		else
+		{
+			alert("enter some query");
+		}
+	}
 }
 var clicked_id = 0;
 var solution;
@@ -193,4 +205,11 @@ var ajaxRequest = function (url,type,params,callback)
     hr.send(params);
 }
 
-
+function gup( name, url ) {					// from stackoverflow   http://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-url-parameter
+      if (!url) url = location.href;
+      name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+      var regexS = "[\\?&]"+name+"=([^&#]*)";
+      var regex = new RegExp( regexS );
+      var results = regex.exec( url );
+      return results == null ? null : results[1];
+    }

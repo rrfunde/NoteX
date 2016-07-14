@@ -99,8 +99,10 @@
 			
 			String query = request.getParameter("q");
                     String name = request.getParameter("name");
-			if( query != null && name!= null)
+			if( query != null  )
 			{
+				if( name != "")
+				{
 				 MongoCollection<Document> collection = mongoDatabase.getCollection(name);
 			        collection.createIndex(Indexes.text("problem"));
 			        Bson textSearch = Filters.text(query, new TextSearchOptions().language("english"));
@@ -121,8 +123,9 @@
             cursor.close();
         }
 
-                             
-			}
+        }
+       
+        }
 			else
 			{
 
