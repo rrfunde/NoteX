@@ -29,7 +29,7 @@ var getTags = function(){
 var formFill = function(){
 
   //  getTags();
-    sub = ["python","database","chrome","protocol","HTML","php","Mongodb","xml","cassandra","jsp","json","math","equation","JavaScript","math","network","meaning","Synonyms","dictionary","java","django","tech","windows","hadoop","jquery","mysql","linux","ubuntu","operating","database"," c ","android","data","cobol","basic","ruby"];
+    sub = ["python","database","chrome","protocol","HTML","php","Mongodb","xml","cassandra","jsp","json","math","equation","JavaScript","math","network","meaning","Synonyms","dictionary","java","django","tech","windows","hadoop","jquery","mysql","linux","ubuntu","operating","database"," c ","android","data","cobol","basic","ruby","mongodb"];
     chrome.tabs.executeScript(null,{file:"getSelection.js"},function(response){
         document.getElementById("editor").innerHTML = response;
         document.getElementById("text").innerHTML=response;
@@ -49,7 +49,7 @@ var formFill = function(){
         var length = sub.length;
 
         for(var i = 0; i<length ;i++){
-            if(title.indexOf(sub[i]) > -1){
+            if(title.toLowerCase().indexOf(sub[i]) > -1){
                 subject = sub[i];
                 break;
             }

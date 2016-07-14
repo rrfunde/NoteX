@@ -4,7 +4,7 @@
 
 function genericOnClick(info, tab) {
 
-    sub = ["python","database","chrome","protocol","HTML","php","Mongodb","xml","cassandra","jsp","json","math","equation","JavaScript","math","network","meaning","Synonyms","dictionary","java","django","tech","windows","hadoop","jquery","mysql","linux","ubuntu","operating","database"," c ","android","data","cobol","basic","ruby"];
+    sub = ["python","database","chrome","protocol","HTML","php","Mongodb","xml","cassandra","jsp","json","math","equation","JavaScript","math","network","meaning","Synonyms","dictionary","java","django","tech","windows","hadoop","jquery","mysql","linux","ubuntu","operating","database"," c ","android","data","cobol","basic","ruby","mongodb"];
     var title,solution = "",link,subject = "";
     var YOUTUBE = 0;                        // for handling youtube videos
     title = tab.title;
@@ -14,7 +14,7 @@ function genericOnClick(info, tab) {
 
     for(var i = 0; i<len; i++)
     {
-        if(title.indexOf(sub[i]) > -1)
+        if(title.toLowerCase().indexOf(sub[i]) > -1)
         {
             subject = sub[i];
             break;
@@ -57,7 +57,7 @@ function genericOnClick(info, tab) {
         };
         hr.send();
     }
-    else if(info.mediaType == undefined && info.linkUrl != undefined && YOUTUBE == 0)     // Handle hyper links
+    else if(info.linkUrl != undefined && YOUTUBE == 0)     // Handle hyper links
     {
         if( info.linkUrl.indexOf("vimeo") > -1)
         {
@@ -73,7 +73,7 @@ function genericOnClick(info, tab) {
         }
         saveData(title,subject,solution,link);
     }
-    if(info.mediaType != undefined && YOUTUBE == 0)
+   else if(info.mediaType != undefined && YOUTUBE == 0)
     {
 
 
@@ -94,6 +94,10 @@ function genericOnClick(info, tab) {
         }
 
         saveData(title,subject,solution,link);
+    }
+    else
+    {
+    		saveData(title,subject,solution,link);
     }
 }
 

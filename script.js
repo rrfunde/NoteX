@@ -30,8 +30,10 @@ addDocument = function () {
     {
         var URL = "http://localhost:8080/NoteX/store";
         var params = "title=" + subject + "&topic=" + title + "&text=<b></b>&linkText=";
-        ajaxRequest(URL,"POST",params);
-        location.reload();
+        ajaxRequest(URL,"POST",params,function(){
+        location.reload();        
+        });
+
     }
 };
 
@@ -42,11 +44,21 @@ removeDocument = function (id, collectionName) {
     {
         var url = "http://localhost:8080/NoteX/api";
         var params = "req=removeDocument&id="+ id + "&name="+collectionName;
-        ajaxRequest(url,"POST",params);
-        location.reload()
+        ajaxRequest(url,"POST",params,function(){
+         location.reload();
+        });
+       
     }
 
 };
+
+var Search = function(){
+	var query = document.getElementById("search").value;
+	if(query != ""){
+	location.href = "?name=" + location.search.substr(6) +"&q=" + query;	
+	}
+
+}
 var clicked_id = 0;
 var solution;
 
@@ -94,7 +106,7 @@ function clickEvent(clicked_id1, name1) {
 
         toolbar1: "undo redo | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist   ",
         toolbar2: "fontselect fontsizeselect | style-p style-h1 style-h2 style-h3 style-pre style-code | link image | fullscreen",
-        menubar: 'file edit insert view table ',
+        menubar: 'edit insert view table ',
 
         image_advtab: true,
 
@@ -157,7 +169,7 @@ function clickEvent(clicked_id1, name1) {
 }
 
 
-var ajaxRequest = function (url,type,params)
+var ajaxRequest = function (url,type,params,callback)
 {
     var hr = new XMLHttpRequest();
     // Create some variables we need to send to our PHP file
@@ -168,7 +180,7 @@ var ajaxRequest = function (url,type,params)
     hr.onreadystatechange = function() {
         if(hr.readyState == 4 && hr.status == 200) {  // ajax request completed
             var return_data = hr.responseText;
-            // do stuff with return data
+            callback();
         }
     }
 

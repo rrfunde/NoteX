@@ -8,6 +8,8 @@
         import="com.mongodb.client.MongoDatabase"
 	import="com.mongodb.BasicDBObject"
 	import="com.mongodb.DBObject"
+	import="org.bson.conversions.Bson"
+	import="com.mongodb.client.model.*"
 %>
 <%!
 
@@ -24,13 +26,12 @@
     <script src="js/highlight.min.js"></script>
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/ghpages-materialize.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+   <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/bootstrap.min.js"></script>
     <script src="js/materialize.min.js"></script>
     <link rel="stylesheet" href="css/icon.css">
     <script>hljs.initHighlightingOnLoad();</script>
     <link rel="icon" type="image/png" href="icon.png"/>
-    <link rel="stylesheet" type="text/css" href="content.css">
     <script src="script.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -98,14 +99,28 @@
 			
 			String query = request.getParameter("q");
                     String name = request.getParameter("name");
-			if( query != null)
+			if( query != null && name!= null)
 			{
-				DBObject findCommand = new BasicDBObject(
-				    "$text", new BasicDBObject("$search", query));
-				
-                               
-                                  MongoCollection<Document> collection = mongoDatabase.getCollection(name);
-                             	MongoCursor<Document> cursor = collection.find().iterator();
+				 MongoCollection<Document> collection = mongoDatabase.getCollection(name);
+			        collection.createIndex(Indexes.text("problem"));
+			        Bson textSearch = Filters.text(query, new TextSearchOptions().language("english"));
+			        MongoCursor<Document> cursor = collection.find(textSearch).iterator();
+
+			        try {
+			            while (cursor.hasNext()) {
+		                    Document doc =cursor.next();
+		                      out.print("<section ><h4>\n<b>" + doc.get("problem") + "</b></h4><div id=\"" + idNo +
+                                    "\"><p>"  +doc.get("solution") + "</p></div><a href =\'" + doc.get("link") +
+                                    "\'>"+doc.get("link")+ "</a> <h4 class='right-align'><a style='' class='waves-effect waves-light btn ' " +
+                                    "id=\"" + doc.get("_id") + "\" name=\"" + idNo + "\" onClick=clickEvent(this.id,this.name) >Edit\n" +
+                                    "</a>&nbsp;<a class=\"waves-effect waves-light red lighten-1 btn\" onClick=removeDocument(\"" + doc.get("_id") +"\",\""+ name+"\")>-</a></section>");
+                                    idNo++;
+
+            }
+        } finally {
+            cursor.close();
+        }
+
                              
 			}
 			else
@@ -124,7 +139,7 @@
                                     "\"><p>"  +doc.get("solution") + "</p></div><a href =\'" + doc.get("link") +
                                     "\'>"+doc.get("link")+ "</a> <h4 class='right-align'><a style='' class='waves-effect waves-light btn ' " +
                                     "id=\"" + doc.get("_id") + "\" name=\"" + idNo + "\" onClick=clickEvent(this.id,this.name) >Edit\n" +
-                                    "</a><a class=\"waves-effect waves-light red lighten-1 btn\" onClick=removeDocument(\"" + doc.get("_id") +"\",\""+ name+"\")>-</a>\n</h5></section>");
+                                    "</a>&nbsp;<a class=\"waves-effect waves-light red lighten-1 btn\" onClick=removeDocument(\"" + doc.get("_id") +"\",\""+ name+"\")>-</a></section>");
                                     idNo++;
                                 }
                               } finally {
