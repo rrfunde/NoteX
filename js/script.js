@@ -73,7 +73,7 @@ var Search = function(){
 		}
 		else
 		{
-			alert("enter some query");
+			alert("enter some query");	
 		}
 	}
 }
