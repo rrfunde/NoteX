@@ -83,16 +83,10 @@ var formFill = function(){
             else {
                 topicSet = res.Topic;
                 document.getElementById("keepTopic").checked = true;
-
             }
             document.getElementById("topic").value = topicSet;
-
-
         });
         document.getElementById("linkText").innerHTML = url;
-
-
-
     })
 };
 

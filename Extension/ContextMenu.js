@@ -29,6 +29,8 @@ function genericOnClick(info, tab) {
     {
         subject = "other";
     }
+       
+    
     if(info.selectionText != undefined)
     {
         solution = info.selectionText;
@@ -116,10 +118,21 @@ var saveData = function(title,subject,solution,url)
 
     var URL = "http://localhost:8080/NoteX/store";
     var hr = new XMLHttpRequest();
-    var params = "title=" + subject + "&topic=" + title + "&text=" + solution + "&linkText=" + url;
+
     hr.open("POST",URL,true);
     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   
+       chrome.storage.local.get("Title", function (res) {
+       
+            if (res.Title != "")
+                subject = res.Title;          
 
+	 chrome.storage.local.get("Topic", function (res) {
+            if (res.Topic != "")
+                title = res.Topic;
+                
+     var params = "title=" + subject + "&topic=" + title + "&text=" + solution + "&linkText=" + url;
+            
     hr.onreadystatechange = function(){
         if(hr.readyState == 4 && hr.status == 200){
          //   alert(hr.responseText);
@@ -128,4 +141,11 @@ var saveData = function(title,subject,solution,url)
 
     };
     hr.send(params);
+        });
+
+
+        });
+   
+
+ 
 };
