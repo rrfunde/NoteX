@@ -4,7 +4,11 @@
 
 function genericOnClick(info, tab) {
 
-    sub = ["python","database","chrome","protocol","HTML","php","Mongodb","xml","cassandra","jsp","json","math","equation","JavaScript","math","network","meaning","Synonyms","dictionary","java","django","tech","windows","hadoop","jquery","mysql","linux","ubuntu","operating","database"," c ","android","data","cobol","basic","ruby","mongodb"];
+    sub =["python","database","chrome","protocol","html","php","xml","cassandra","jsp","json","math","equation",
+    "javascript","math","network","meaning","Synonyms","dictionary","java","django","tech","windows","hadoop",
+    "jquery","mysql","linux","ubuntu","operating","database","android","data","cobol","basic","ruby","mongodb",
+    "angular","css","node","swift","oracle","git","apache","matlab","scala","bash","sqlite","cloud","aws","azure","jsf","c"];
+    
     var title,solution = "",link,subject = "";
     var YOUTUBE = 0;                        // for handling youtube videos
     title = tab.title;
