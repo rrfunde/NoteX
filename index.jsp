@@ -6,7 +6,8 @@
         import="com.mongodb.DB"
         import="com.mongodb.client.*"
         import="com.mongodb.client.MongoDatabase"
-
+	import="com.mongodb.BasicDBObject"
+	import="com.mongodb.DBObject"
 %>
 <%!
 
@@ -54,12 +55,12 @@
 
                 <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%);">
 
-                    <li class="logo"><a id="logo-container" >
-                        <h1>NoteX</h1>
+                    <li class="logo"><a id="logo-container" href="javascript:location.href=location.origin + location.pathname;">
+                        <h1>NoteX	</h1>
                         </a></li>
                     <li class="search">
                         <div class="search-wrapper card">
-                            <input id="search"><i class="material-icons">search</i>
+                            <input id="search"><i class="material-icons" onclick="Search()">search</i>
                             <div class="search-results"></div>
                         </div>
                     </li>
@@ -94,8 +95,22 @@
 
                 <div class="wrapper">
                 <%
-
+			
+			String query = request.getParameter("q");
                     String name = request.getParameter("name");
+			if( query != null)
+			{
+				DBObject findCommand = new BasicDBObject(
+				    "$text", new BasicDBObject("$search", query));
+				
+                               
+                                  MongoCollection<Document> collection = mongoDatabase.getCollection(name);
+                             	MongoCursor<Document> cursor = collection.find().iterator();
+                             
+			}
+			else
+			{
+
                 	if(name != null)
                 	{
                              MongoCollection<Document> collection = mongoDatabase.getCollection(name);
@@ -116,6 +131,7 @@
                                 cursor.close();
                               }
                           }    
+                          }
                 %>
 
                 </div>
