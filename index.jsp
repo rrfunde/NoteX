@@ -61,7 +61,7 @@
                         </a></li>
                     <li class="search">
                         <div class="search-wrapper card">
-                            <input id="search"><i class="material-icons" onclick="Search()">search</i>
+                            <input id="search"><i class="material-icons" onclick="Search()" id="searchBtn">search</i>
                             <div class="search-results"></div>
                         </div>
                     </li>

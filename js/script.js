@@ -8,6 +8,12 @@ $(document).ready(function() {
                 $("body").removeClass("sticky-header");
             }//if-else
         });//win func.
+        
+       $("#search").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#searchBtn").click();
+    }
+});
     });//ready func.
 
 
@@ -186,3 +192,5 @@ var ajaxRequest = function (url,type,params,callback)
 
     hr.send(params);
 }
+
+
