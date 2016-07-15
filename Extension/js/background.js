@@ -34,7 +34,7 @@ var formFill = function(){
     "jquery","mysql","linux","ubuntu","operating","database","android","data","cobol","basic","ruby","mongodb",
     "angular","css","node","swift","oracle","git","apache","matlab","scala","bash","sqlite","cloud","aws","azure","jsf","c"];
     
-    chrome.tabs.executeScript(null,{file:"getSelection.js"},function(response){
+    chrome.tabs.executeScript(null,{file:"js/getSelection.js"},function(response){
         document.getElementById("editor").innerHTML = response;
         document.getElementById("text").innerHTML=response;
 

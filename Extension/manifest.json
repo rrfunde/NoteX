@@ -22,13 +22,13 @@
         "https://*/*"
       ],
       "js": [
-        "popup.js"
+        "js/popup.js"
       ]
     }
   ],
   "background": {
     "scripts": [
-      "background.js","ContextMenu.js"
+      "js/background.js","js/ContextMenu.js"
     ],
     "persistent": true
   }

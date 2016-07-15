@@ -30,7 +30,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/materialize.min.js"></script>
     <link rel="stylesheet" href="css/icon.css">
-    <link rel="stylesheet" type="text/css" href="content.css">
+    <link rel="stylesheet" type="text/css" href="css/content.css">
     <script>hljs.initHighlightingOnLoad();</script>
     <link rel="icon" type="image/png" href="icon.png"/>
     <script src="js/script.js"></script>

@@ -106,7 +106,7 @@ function clickEvent(clicked_id1, name1) {
 
     tinymce.init({
         selector: "textarea",
-        content_css: "content.css",
+        content_css: "css/content.css",
         force_br_newlines : true,
         auto_focus : "input2",
         force_p_newlines : false,
