@@ -139,7 +139,7 @@
 
                                  Document doc = cursor.next();
 
-                                 out.print("<section ><h4>\n<b>" + doc.get("problem") + "</b></h4><div id=\"" + idNo +
+                                 out.print("<section id=\"section"+ idNo + "\"><h4>\n<b>" + doc.get("problem") + "</b></h4><div id=\"" + idNo +
                                     "\"><p>"  +doc.get("solution") + "</p></div><a href =\'" + doc.get("link") +
                                     "\'>"+doc.get("link")+ "</a> <h4 class='right-align'><a style='' class='waves-effect waves-light btn ' " +
                                     "id=\"" + doc.get("_id") + "\" name=\"" + idNo + "\" onClick=clickEvent(this.id,this.name) >Edit\n" +

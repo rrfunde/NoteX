@@ -83,7 +83,7 @@ var solution;
 
 //	FUNCTION TO CONVERT DIV TO TEXTAREA
 function clickEvent(clicked_id1, name1) {
-
+    location.href = "#section" + name1;
     document.getElementById(clicked_id1).style.display = "none";
     var div = document.getElementById(name1);
     name= name1;
