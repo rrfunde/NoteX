@@ -1,7 +1,7 @@
 /**
  * Created by rohit on 12/7/16.
  */
-
+var IMG_URL = ""
 function genericOnClick(info, tab) {
 
     sub =["python","database","chrome","protocol","html","php","xml","cassandra","jsp","json","math","equation",
@@ -86,6 +86,7 @@ function genericOnClick(info, tab) {
         if(info.mediaType.indexOf("image") > -1 )
         {
                 solution += "<img src=\"" + info.srcUrl + "\"></img>";
+                IMG_URL = info.srcUrl;
 
         }
         else if(info.mediaType.indexOf("video") > -1)
@@ -135,12 +136,27 @@ var saveData = function(title,subject,solution,url)
             
     hr.onreadystatechange = function(){
         if(hr.readyState == 4 && hr.status == 200){
-          var opt = {
+        
+        var opt;
+        
+        if(IMG_URL == ""){
+          opt = {
                             type: "basic",
                             title: "Added to "+subject,
                             message: title,
                             iconUrl: "images/added.png"
                         };
+         }               
+                        else
+                        {
+                             opt = {
+                            type: "image",
+                            title: "Added to "+subject,
+                            message: title,
+                            iconUrl: "images/added.png",
+                            imageUrl: IMG_URL
+                        };
+                        }
 
                         Notification.display(opt);
         }
