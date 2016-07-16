@@ -135,17 +135,37 @@ var saveData = function(title,subject,solution,url)
             
     hr.onreadystatechange = function(){
         if(hr.readyState == 4 && hr.status == 200){
-         //   alert(hr.responseText);
+          var opt = {
+                            type: "basic",
+                            title: "Added to "+subject,
+                            message: title,
+                            iconUrl: "images/added.png"
+                        };
+
+                        Notification.display(opt);
         }
 
 
     };
     hr.send(params);
         });
-
-
         });
-   
-
- 
 };
+
+
+      var Notification = (function () {
+                var notification = null;
+
+                return {
+                    display: function (opt) {
+                        notification = chrome.notifications.create(opt);
+                        notification.show();
+
+                    },
+                    hide: function () {
+                        notification.close();
+                    }
+                };
+            })();
+
+
