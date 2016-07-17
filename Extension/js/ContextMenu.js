@@ -9,7 +9,7 @@ function genericOnClick(info, tab) {
   document.head.appendChild(tags);
   
   tags.onload = function(){
-  sub = getTags();	
+  getTags(function(sub){
     var title,solution = "",link,subject = "";
     var YOUTUBE = 0;                        // for handling youtube videos
     title = tab.title;
@@ -107,6 +107,8 @@ function genericOnClick(info, tab) {
     {
     		saveData(title,subject,solution,link);
     }
+  	
+  });	
 
   
   }
