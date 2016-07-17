@@ -4,11 +4,12 @@
 var IMG_URL = ""
 function genericOnClick(info, tab) {
 
-    sub =["python","database","chrome","protocol","html","php","xml","cassandra","jsp","json","math","equation",
-    "javascript","math","network","meaning","Synonyms","dictionary","java","django","tech","windows","hadoop",
-    "jquery","mysql","linux","ubuntu","operating","database","android","data","cobol","basic","ruby","mongodb",
-    "angular","css","node","swift","oracle","git","apache","matlab","scala","bash","sqlite","cloud","aws","azure","jsf"," c "];
-    
+   tags = document.createElement("script");
+  tags.src = "js/tags.js";
+  document.head.appendChild(tags);
+  
+  tags.onload = function(){
+  	  sub = getTags();	
     var title,solution = "",link,subject = "";
     var YOUTUBE = 0;                        // for handling youtube videos
     title = tab.title;
@@ -106,7 +107,10 @@ function genericOnClick(info, tab) {
     {
     		saveData(title,subject,solution,link);
     }
-}
+
+  
+  }
+  }
 
 
 var id = chrome.contextMenus.create({"title": "save to NoteX", "contexts":["all"],
@@ -160,8 +164,6 @@ var saveData = function(title,subject,solution,url)
 
                         Notification.display(opt);
         }
-
-
     };
     hr.send(params);
         });

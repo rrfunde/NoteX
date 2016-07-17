@@ -52,6 +52,10 @@ h1
     color: #616161;
 }
 
+h4
+{
+	font-size: 18px;
+}
 
 .mce-fullscreen{
 	margin-left: 19% !important;

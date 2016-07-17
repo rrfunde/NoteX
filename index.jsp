@@ -26,8 +26,7 @@
     <script src="js/highlight.min.js"></script>
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/ghpages-materialize.css">
-   <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/bootstrap.min.js"></script>
+
     <script src="js/materialize.min.js"></script>
     <link rel="stylesheet" href="css/icon.css">
     <link rel="stylesheet" type="text/css" href="css/content.css">
@@ -66,7 +65,8 @@
                             <div class="search-results"></div>
                         </div>
                     </li>
-                    <a onclick="addCollection()" class="btn-floating  waves-effect waves-light red"><i class="large material-icons"></i></a>
+                    <br>
+                    <a onclick="addCollection()" class="btn-floating  waves-effect waves-light red"><i class="large material-icons"></i>+</a>
                     <%
                         MongoIterable<String> collectionNames = mongoDatabase.listCollectionNames();
                         for(String collection: collectionNames){
