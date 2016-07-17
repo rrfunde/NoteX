@@ -105,7 +105,7 @@
 				if( name != "")
 				{
 				 MongoCollection<Document> collection = mongoDatabase.getCollection(name);
-			        collection.createIndex(Indexes.text("problem"));
+			        collection.createIndex(Indexes.compoundIndex(Indexes.text("problem"),Indexes.text("solution")));
 			        Bson textSearch = Filters.text(query, new TextSearchOptions().language("english"));
 			        MongoCursor<Document> cursor = collection.find(textSearch).iterator();
 
