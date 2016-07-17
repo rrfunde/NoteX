@@ -1,24 +1,14 @@
 <web-app>  
   
-<servlet>  
-<servlet-name>ExtensionDataHandler</servlet-name>
-<servlet-class>ExtensionDataHandler</servlet-class>
-</servlet>  
-
 <servlet>
     <servlet-name>Api</servlet-name>
     <servlet-class>Api</servlet-class>
 </servlet>
 
-<servlet-mapping>  
-<servlet-name>ExtensionDataHandler</servlet-name>
-<url-pattern>/store</url-pattern>  
-</servlet-mapping>  
-
-    <servlet-mapping>
+  <servlet-mapping>
         <servlet-name>Api</servlet-name>
         <url-pattern>/api</url-pattern>
-    </servlet-mapping>
+   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>  

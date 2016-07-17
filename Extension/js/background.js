@@ -32,7 +32,7 @@ var formFill = function(){
      sub =["python","database","chrome","protocol","html","php","xml","cassandra","jsp","json","math","equation",
     "javascript","math","network","meaning","Synonyms","dictionary","java","django","tech","windows","hadoop",
     "jquery","mysql","linux","ubuntu","operating","database","android","data","cobol","basic","ruby","mongodb",
-    "angular","css","node","swift","oracle","git","apache","matlab","scala","bash","sqlite","cloud","aws","azure","jsf","c"];
+    "angular","css","node","swift","oracle","git","apache","matlab","scala","bash","sqlite","cloud","aws","azure","jsf"," c "];
     
     chrome.tabs.executeScript(null,{file:"js/getSelection.js"},function(response){
         document.getElementById("editor").innerHTML = response;

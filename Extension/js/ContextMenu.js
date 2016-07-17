@@ -7,7 +7,7 @@ function genericOnClick(info, tab) {
     sub =["python","database","chrome","protocol","html","php","xml","cassandra","jsp","json","math","equation",
     "javascript","math","network","meaning","Synonyms","dictionary","java","django","tech","windows","hadoop",
     "jquery","mysql","linux","ubuntu","operating","database","android","data","cobol","basic","ruby","mongodb",
-    "angular","css","node","swift","oracle","git","apache","matlab","scala","bash","sqlite","cloud","aws","azure","jsf","c"];
+    "angular","css","node","swift","oracle","git","apache","matlab","scala","bash","sqlite","cloud","aws","azure","jsf"," c "];
     
     var title,solution = "",link,subject = "";
     var YOUTUBE = 0;                        // for handling youtube videos
@@ -117,7 +117,7 @@ var id = chrome.contextMenus.create({"title": "save to NoteX", "contexts":["all"
 var saveData = function(title,subject,solution,url)
 {
 
-    var URL = "http://localhost:8080/NoteX/store";
+    var URL = "http://localhost:8080/NoteX/api";
     var hr = new XMLHttpRequest();
 
     hr.open("POST",URL,true);
@@ -132,7 +132,7 @@ var saveData = function(title,subject,solution,url)
             if (res.Topic != "")
                 title = res.Topic;
                 
-     var params = "title=" + subject + "&topic=" + title + "&text=" + solution + "&linkText=" + url;
+     var params = "title=" + subject + "&topic=" + title + "&text=" + solution + "&linkText=" + url + "&req=addDocument";
             
     hr.onreadystatechange = function(){
         if(hr.readyState == 4 && hr.status == 200){

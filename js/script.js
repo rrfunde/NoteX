@@ -34,8 +34,8 @@ addDocument = function () {
     var subject = location.search.substr(6);
     if(title != "")
     {
-        var URL = "http://localhost:8080/NoteX/store";
-        var params = "title=" + subject + "&topic=" + title + "&text=<b></b>&linkText=";
+        var URL = "http://localhost:8080/NoteX/api";
+        var params = "title=" + subject + "&topic=" + title + "&text=<b></b>&linkText=&req=addDocument";
         ajaxRequest(URL,"POST",params,function(){
         location.reload();        
         });

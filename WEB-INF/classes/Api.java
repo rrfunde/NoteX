@@ -41,6 +41,39 @@ public class Api extends HttpServlet{
 
         }
 
+
+	else if(request.equals("addDocument"))
+	{
+	
+	MongoCollection<Document> collection = mongoDatabase.getCollection(req.getParameter("title").toLowerCase());
+
+        String problem = req.getParameter("topic");
+        String solution = req.getParameter("text");
+        String link = req.getParameter("linkText");
+
+
+        Document myDoc = collection.find(eq("problem", problem)).first();
+
+        try {
+            int a = req.getParameterValues("code").length;
+            solution = "<pre><code>" + solution + "</pre></code>";
+        } catch (Exception e) {
+        }
+
+        try {
+            myDoc.toJson();
+            collection.updateOne(eq("problem", problem), set("solution", myDoc.get("solution") + "<br /> " + solution));
+
+            pw.print("updated");
+
+        } catch (Exception e) {
+            Document doc = new Document("problem", problem).append("solution", solution).append("link", link);
+            collection.insertOne(doc);
+        
+            pw.print("saved");
+        }
+	
+	}
         else if(request.equals("removeDocument"))
         {
             String name = req.getParameter("name");
