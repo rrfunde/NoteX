@@ -1,11 +1,9 @@
 <%@page import="com.mongodb.DBCollection"
         import="com.mongodb.MongoClient"
-        import="com.mongodb.client.MongoCursor"
         import="org.bson.Document"
         import="com.mongodb.client.FindIterable"
         import="com.mongodb.DB"
         import="com.mongodb.client.*"
-        import="com.mongodb.client.MongoDatabase"
 	import="com.mongodb.BasicDBObject"
 	import="com.mongodb.DBObject"
 	import="org.bson.conversions.Bson"
@@ -130,7 +128,7 @@
 			else
 			{
 
-                	if(name != null)
+                	if(name != "" && name != null)
                 	{
                              MongoCollection<Document> collection = mongoDatabase.getCollection(name);
                              MongoCursor<Document> cursor = collection.find().iterator();

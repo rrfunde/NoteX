@@ -32,7 +32,7 @@ addCollection = function()
 addDocument = function () {
     var title = prompt("Enter topic name");
     var subject = location.search.substr(6);
-    if(title != "")
+    if(title != "" && title != null)
     {
         var URL = "http://localhost:8080/NoteX/api";
         var params = "title=" + subject + "&topic=" + title + "&text=<b></b>&linkText=&req=addDocument";

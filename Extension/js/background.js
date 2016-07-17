@@ -1,9 +1,5 @@
 
-
-
 var sub,title,url,text,subject = "";
-
-
 
 var formFill = function(s){
 
@@ -102,15 +98,10 @@ function titleCheck()                     // if user chooses to store title for 
         })
 }
 
+getTags(function(s){
+	formFill(s);
+})
 
-
-
-tags = document.createElement("script");
-tags.src = "js/tags.js";
-document.head.appendChild(tags);
-tags.onload = function(){
-formFill(getTags());
-};
 
 
 var ele = document.getElementById('form1');
