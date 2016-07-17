@@ -5,15 +5,12 @@ import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCursor;
 import org.bson.Document;
-import com.mongodb.client.FindIterable;
 import com.mongodb.DB;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Updates.set;
 import org.bson.types.ObjectId;
 import com.mongodb.BasicDBObject;
-
+import com.mongodb.client.*;
 public class Api extends HttpServlet{
     public void doPost(HttpServletRequest req,HttpServletResponse res)   throws ServletException,IOException
     {
@@ -86,6 +83,17 @@ public class Api extends HttpServlet{
             collection.deleteOne(query);
             pw.print("deleted");
 
+        }
+        
+         else if(request.equals("getCollections"))
+        {
+  		      MongoIterable<String> collectionNames = mongoDatabase.listCollectionNames();
+                       for(String collection: collectionNames){
+                            if(collection.startsWith("system.") == false){
+
+                                pw.print(collection +",");
+                            }
+                        }		      	
         }
         pw.close();
 
