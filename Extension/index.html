@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet prefetch' href='css/bootstrap.css'>
+<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+        <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class="container">
+        <form
+                id = "form1"
+                name = "form1"
+                method = "post"
+                action = "http://localhost:8080/NoteX/api" >
+
+            <table>
+                <tr>
+                    <td>
+                        <input type="checkbox" value="" id="keepTitle" class="checkbox">
+</td> <td>
+                    <div class="group">
+                        <input type="text" id="title" name="title">
+                        <span class="bar"></span>
+                        <label>Subject</label>
+                    </div>
+                    </td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+
+                        <input type="checkbox" value="" id="keepTopic" class="checkbox">
+                    </td> <td>
+                    <div class="group">
+                        <input type="text" id="topic" name="topic">
+                        <span class="bar"></span>
+                        <label>Title</label>
+                    </div>
+                </td>
+                </tr>
+        </table>
+            <br>
+	<div id="editparent">
+		<div id="editControls">
+			<div class="btn-group">
+				<a class="btn btn-xs btn-default" data-role="undo" href="#" title="Undo"><i class="fa fa-undo"></i></a>
+				<a class="btn btn-xs btn-default" data-role="redo" href="#" title="Redo"><i class="fa fa-repeat"></i></a>
+			</div>
+			<div class="btn-group">
+				<a class="btn btn-xs btn-default" data-role="bold" href="#" title="Bold"><i class="fa fa-bold"></i></a>
+				<a class="btn btn-xs btn-default" data-role="italic" href="#" title="Italic"><i class="fa fa-italic"></i></a>
+				<a class="btn btn-xs btn-default" data-role="underline" href="#" title="Underline"><i class="fa fa-underline"></i></a>
+				<a class="btn btn-xs btn-default" data-role="strikeThrough" href="#" title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
+			</div>
+			<div class="btn-group">
+				<a class="btn btn-xs btn-default" data-role="indent" href="#" title="Blockquote"><i class="fa fa-indent"></i></a>
+				<a class="btn btn-xs btn-default" data-role="insertUnorderedList" href="#" title="Unordered List"><i class="fa fa-list-ul"></i></a>
+				<a class="btn btn-xs btn-default" data-role="insertOrderedList" href="#" title="Ordered List"><i class="fa fa-list-ol"></i></a>
+			</div>
+			<div class="btn-group">
+				<a class="btn btn-xs btn-default" data-role="h1" href="#" title="Heading 1"><i class="fa fa-header"></i><sup>1</sup></a>
+				<a class="btn btn-xs btn-default" data-role="h2" href="#" title="Heading 2"><i class="fa fa-header"></i><sup>2</sup></a>
+				<a class="btn btn-xs btn-default" data-role="h3" href="#" title="Heading 3"><i class="fa fa-header"></i><sup>3</sup></a>
+				<a class="btn btn-xs btn-default" data-role="p" href="#" title="Paragraph"><i class="fa fa-paragraph"></i></a>
+			</div>
+		</div>
+
+		<div id="editor" contenteditable></div>
+    <br>
+        <table>
+            <tr>
+                <td>
+                    <input type="checkbox" name="code" value="code" id="isCode" class="checkbox">
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </td><td>
+                            <div class="button-container">
+                            <input type="submit" class='button --blue center'>
+                        </td>
+            </tr>
+        </table>
+
+    </div>
+         <textarea style="display:none;"
+                   id = "linkText"
+                   name = "linkText">
+         </textarea>
+
+             <textarea style="display:none;"
+                       id = "text"
+                       name = "text">
+            </textarea>
+            <input type="hidden" name="req" value="addDocument" />
+        </form>
+    </div>	
+</div>
+    <script src='js/jquery.min.js'></script>
+<script src='js/bootstrap.min.js'></script>
+        <script src="js/index.js"></script>
+         <script src="js/tags.js"></script>
+        <script src="js/background.js"></script>
+
+  </body>
+</html>

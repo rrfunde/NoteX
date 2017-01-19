@@ -1,0 +1,43 @@
+
+<html>
+<head>
+    <script src="../lib/jquery.min.js" type="text/javascript">
+    </script>
+    <script src="../lib/jquery.embedly.js" type="text/javascript">
+    </script>
+    <script src="../lib/mustache.js" type="text/javascript">
+    </script>
+    <script src="../dist/jquery.preview.min.js" type="text/javascript">
+    </script>
+    <link href="../css/preview.css" rel="stylesheet">
+
+</head>
+<body>
+    <form action="." class="form-vertical" id="preview_form" method="post"
+    name="preview_form">
+  
+        <div class="row collapse">
+            <div class="large-8 columns">
+                <input class="input-xxlarge" id="id_url" name="url" type="text"
+                value="">
+            </div>
+       
+        <div class="row">
+        </div>
+            <div class="large-11 columns end">
+                <div class="selector-wrapper"></div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+    $(document).ready(function(){
+      $('#id_url').preview({key: '80471f349f134ae09d5c0230b9cc51b8', 
+                            query : {
+                              autoplay : 1,
+                              maxwidth: 600
+                            }})
+    });
+    </script>
+</body>
+</html>

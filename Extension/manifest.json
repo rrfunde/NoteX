@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "NoteX mini",
+  "description": "This extension demonstrates Easier way to take notes.",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "notifications",
+    "clipboardWrite",
+    "activeTab",
+    "storage",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js","js/ContextMenu.js"
+    ],
+    "persistent": true
+  }
+}
