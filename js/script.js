@@ -1,3 +1,6 @@
+var clicked_id = 0;
+var solution;
+
 $(document).ready(function() {
     $(function () {
         $(window).scroll(function () {
@@ -8,25 +11,21 @@ $(document).ready(function() {
                 $("body").removeClass("sticky-header");
             }//if-else
         });//win func.
-
-       $("#search").keyup(function(event){
-    if(event.keyCode == 13){
-        $("#searchBtn").click();
-    }
-});
-    });//ready func.
-
-
+        $("#search").keyup(function(event){
+            if(event.keyCode == 13){
+                $("#searchBtn").click();
+            }
+        });
+     });
 });
 
-addCollection = function()
-{
+addCollection = function() {
     var Collection = prompt(" enter new subject name").toLocaleLowerCase();
     if (Collection != null) {
         var url = "http://localhost:8080/NoteX/api";
         var params= "Collection="+Collection + "&req=newCollection";
         ajaxRequest(url,"POST",params,function(){
-        	location.reload();
+        	 location.reload();
         });
     }
 };
@@ -34,54 +33,39 @@ addCollection = function()
 addDocument = function () {
     var title = prompt("Enter topic name");
     var subject = location.search.substr(6);
-    if(title != "" && title != null)
-    {
+    if(title != "" && title != null) {
         var URL = "http://localhost:8080/NoteX/api";
         var params = "title=" + subject + "&topic=" + title + "&text=<b></b>&linkText=&req=addDocument";
-        ajaxRequest(URL,"POST",params,function(){
-        location.reload();
+        ajaxRequest(URL,"POST",params,function() {
+            location.reload();
         });
-
-    }
+     }
 };
 
 removeDocument = function (id, collectionName) {
     var choice = confirm("do you want to confirm");
-
-    if(choice)
-    {
+    if(choice) {
         var url = "http://localhost:8080/NoteX/api";
         var params = "req=removeDocument&id="+ id + "&name="+collectionName;
         ajaxRequest(url,"POST",params,function(){
-         location.reload();
+            location.reload();
         });
-
     }
-
 };
 
-var Search = function(){
+var Search = function() {
 	var query = document.getElementById("search").value;
-	var coll = gup("name",location.href);
-	if(query != "" && coll != null){
-
-	location.href =  location.origin + location.pathname +"?name=" + coll	 +"&q=" + query;
-	}
-	else
-	{
-		if(coll ==  null)
-		{
-			alert("choose collection and then search");
-		}
-		else
-		{
-			alert("enter some query");
-		}
+	var coll = getValueFromParameter("name",location.href);
+	if(query != "" && coll != null) {
+	   location.href =  location.origin + location.pathname +"?name=" + coll	 +"&q=" + query;
+	} else {
+		  if(coll ==  null) {
+			     alert("choose collection and then search");
+		  } else {
+			     alert("enter some query");
+		 }
 	}
 }
-var clicked_id = 0;
-var solution;
-
 
 //	FUNCTION TO CONVERT DIV TO TEXTAREA
 function clickEvent(clicked_id1, name1) {
@@ -98,13 +82,10 @@ function clickEvent(clicked_id1, name1) {
     button1.innerHTML = "Submit";
     input1.innerHTML = divData;
     input1.maxLength = "5000";
-   /* button1.className="serverSubmit";*/
-    // input1.cols = "80";
     input1.rows = "40";
     input1.name = "input2";
-    div.appendChild(input1); //appendChild
+    div.appendChild(input1);
     div.appendChild(button1);
-
 
     tinymce.init({
         selector: "textarea",
@@ -128,9 +109,7 @@ function clickEvent(clicked_id1, name1) {
         toolbar1: "undo redo | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist   ",
         toolbar2: "fontselect fontsizeselect | style-p style-h1 style-h2 style-h3 style-pre style-code | link image | fullscreen",
         menubar: 'edit insert view table ',
-
         image_advtab: true,
-
         setup: function (editor) {
             editor.addButton('mybutton', {
                 text: 'My button',
@@ -140,25 +119,18 @@ function clickEvent(clicked_id1, name1) {
                     editor.body.style.fontSize = '24px';
                 }
             });
-
-
             editor.on('keydown', function (event) {
                 if (event.keyCode == 9) { // tab pressed
                     if (event.shiftKey) {
                         editor.execCommand('Outdent');
-                    }
-                    else {
+                    } else {
                         editor.execCommand('Indent');
                     }
-
                     event.preventDefault();
                     return false;
                 }
             });
-
-        }
-
-
+         }
     });
 
     //	BUTTON ONCLICK FOR GET TINYmce CONTENT
@@ -167,16 +139,14 @@ function clickEvent(clicked_id1, name1) {
         var div=document.getElementById(name);
         var temp=tinyMCE.get('input2').getContent();
         document.getElementById('input2').style.display = "none";
-
         div.innerHTML=temp;
         document.getElementById(clicked_id).style.display = "block";
 
         //	SEND DATA TO SERVER
-
         function getParameterByName(name) {
             name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
             var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                results = regex.exec(location.search);
+            results = regex.exec(location.search);
             return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
 
@@ -184,33 +154,30 @@ function clickEvent(clicked_id1, name1) {
         var url = "http://localhost:8080/NoteX/api";
         var subject = getParameterByName('name');
         var params= "id="+clicked_id+"&Collection="+subject+"&solution="+encodeURIComponent(temp)+"&req=EditServe";
-
         ajaxRequest(url,"POST",params);
     }
 }
 
-
 var ajaxRequest = function (url,type,params,callback)
 {
     var hr = new XMLHttpRequest();
-    // Create some variables we need to send to our PHP file
-
     hr.open(type, url, true);
     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
     hr.onreadystatechange = function() {
         if(hr.readyState == 4 && hr.status == 200) {  // ajax request completed
             var return_data = hr.responseText;
-		if(typeof callback == "function")
-		        callback();
+		        if(typeof callback == "function") {
+		            callback();
+            }
         }
-    }
-
+     }
     hr.send(params);
 }
 
-function gup( name, url ) {					// from stackoverflow   http://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-url-parameter
-      if (!url) url = location.href;
+function getValueFromParameter( name, url ) {					// from stackoverflow   http://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-url-parameter
+      if (!url) {
+          url = location.href;
+      }
       name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
       var regexS = "[\\?&]"+name+"=([^&#]*)";
       var regex = new RegExp( regexS );

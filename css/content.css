@@ -28,7 +28,9 @@ p{
 }
 section{
 	padding: 20px;
-	margin-bottom: 40px;
+	margin-left: 40px;
+	margin-top: 40px;
+	width: 105%;
 	background-color: #fff;
 
 	@include border-radius(4px);
