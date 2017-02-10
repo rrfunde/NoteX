@@ -1,6 +1,6 @@
 # NoteX
 
-NoteX have features like store notes from chrome extension, add notes,videos or other media by selecting text or media by right clicking on webpage from chrome browser. You can browse, search and edit notes in your browser.
+NoteX has features like store notes from chrome extension, add notes,videos or other media by selecting text or media by right clicking on webpage from chrome browser. You can browse, search and edit notes in your browser.
 
 Currently NoteX is in beta version.
 
