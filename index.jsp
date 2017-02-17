@@ -10,7 +10,6 @@
 	      import="com.mongodb.client.model.*"
 %>
 <%!
-
 // creating global mongoclient object
     MongoClient mongoClient = new MongoClient();
     MongoDatabase mongoDatabase = mongoClient.getDatabase("NoteX");
@@ -58,9 +57,7 @@
                         </div>
                     </li>
                     <br>
-
                     <%
-
                         // printing all collections and ignoring system collections
                         MongoIterable<String> collectionNames = mongoDatabase.listCollectionNames();
                         for(String collection: collectionNames) {
@@ -121,7 +118,7 @@
                               } finally {
                                 cursor.close();
                               }
-                }
+              }
         %>
           </div>
 <footer class="page-footer">

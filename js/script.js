@@ -90,10 +90,10 @@ function clickEvent(clicked_id1, name1) {
     tinymce.init({
         selector: "textarea",
         content_css: "css/content.css",
-        force_br_newlines : true,
         auto_focus : "input2",
+        force_br_newlines : true,
         force_p_newlines : false,
-        forced_root_block : '',
+        forced_root_block : false,
         theme_advanced_resizing: true,
         fontsize_formats: "8pt 9pt 10pt 11pt 12pt 14pt 16pt 18pt 20pt",
         statusbar: false,
@@ -105,7 +105,6 @@ function clickEvent(clicked_id1, name1) {
             " media  save table contextmenu example ",
             "  paste textcolor colorpicker textpattern"
         ],
-
         toolbar1: "undo redo | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist   ",
         toolbar2: "fontselect fontsizeselect | style-p style-h1 style-h2 style-h3 style-pre style-code | link image | fullscreen",
         menubar: 'edit insert view table ',
@@ -135,7 +134,6 @@ function clickEvent(clicked_id1, name1) {
 
     //	BUTTON ONCLICK FOR GET TINYmce CONTENT
     button1.onclick = function(){
-
         var div=document.getElementById(name);
         var temp=tinyMCE.get('input2').getContent();
         document.getElementById('input2').style.display = "none";
@@ -149,8 +147,6 @@ function clickEvent(clicked_id1, name1) {
             results = regex.exec(location.search);
             return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
-
-
         var url = "http://localhost:8080/NoteX/api";
         var subject = getParameterByName('name');
         var params= "id="+clicked_id+"&Collection="+subject+"&solution="+encodeURIComponent(temp)+"&req=EditServe";
