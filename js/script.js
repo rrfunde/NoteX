@@ -138,7 +138,7 @@ function clickEvent(clicked_id1, name1) {
         var temp=tinyMCE.get('input2').getContent();
         document.getElementById('input2').style.display = "none";
         div.innerHTML=temp;
-        document.getElementById(clicked_id).style.display = "block";
+        document.getElementById(clicked_id).style = "";
 
         //	SEND DATA TO SERVER
         function getParameterByName(name) {
